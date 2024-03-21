@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost/serviciopalabras/servidor.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="App.Operaciones" targetNamespace="http://localhost/serviciopalabras/servidor.php">
+  <types>
+    <xsd:schema targetNamespace="http://localhost/serviciopalabras/servidor.php">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </xsd:schema>
+  </types>
+  <portType name="App.OperacionesPort">
+    <operation name="getPalabraAleatoria">
+      <documentation>Obtiene una palabra aleatoria</documentation>
+      <input message="tns:getPalabraAleatoriaIn"/>
+      <output message="tns:getPalabraAleatoriaOut"/>
+    </operation>
+  </portType>
+  <binding name="App.OperacionesBinding" type="tns:App.OperacionesPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getPalabraAleatoria">
+      <soap:operation soapAction="http://localhost/serviciopalabras/servidor.php#getPalabraAleatoria"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/serviciopalabras/servidor.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/serviciopalabras/servidor.php"/>
+      </output>
+    </operation>
+  </binding>
+  <message name="getPalabraAleatoriaIn"/>
+  <message name="getPalabraAleatoriaOut">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <service name="App.OperacionesService">
+    <port name="App.OperacionesPort" binding="tns:App.OperacionesBinding">
+      <soap:address location="http://localhost/serviciopalabras/servidor.php"/>
+    </port>
+  </service>
+</definitions>
